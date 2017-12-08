@@ -55,7 +55,7 @@ public class NewsController {
     @GetMapping("/kategoria/{category}")
     public String viewCategory(Model model, @PathVariable String category) {
         model.addAttribute("category", categoryRepo.findByName(category));
-        //model.addAttribute("news", categoryRepo.findByName(category).getNews());
+        ///model.addAttribute("news", categoryRepo.findByName(category).getNews());
         return "category";
     }
     
