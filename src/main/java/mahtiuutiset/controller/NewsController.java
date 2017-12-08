@@ -3,6 +3,7 @@ package mahtiuutiset.controller;
 import java.util.ArrayList;
 import java.util.List;
 import javax.annotation.PostConstruct;
+import javax.persistence.NonUniqueResultException;
 import mahtiuutiset.domain.Author;
 import mahtiuutiset.domain.Category;
 import mahtiuutiset.domain.NewsObject;
@@ -54,7 +55,7 @@ public class NewsController {
     }
        
     @GetMapping("/kategoria/{category}")
-    public String viewCategory(Model model, @PathVariable String category) {
+    public String viewCategory(Model model, @PathVariable String category) throws NonUniqueResultException{
         model.addAttribute("category", categoryRepo.findByName(category));
         ///model.addAttribute("news", categoryRepo.findByName(category).getNews());
         return "category";
