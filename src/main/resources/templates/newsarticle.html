@@ -9,17 +9,21 @@
         <header th:replace="fragments/header :: header">
             <p>header</p>
         </header>
-        
+
         <article>
             <h1 th:text="${newsarticle.title}"></h1>
-
             <h3 th:text="${newsarticle.lead}"></h3>
-            <!--kuva, author-->
-            
+            <!--kuva, -->
+            Kirjoittajat:
+            <div th:each="author : ${newsarticle.authors}" th:text="${author.name}"></div>
+            <!--<span th:each="a, iter : ${newsarticle.authors}" th:text="!${iter.last} ? ${a} + ',': ${a}"></span>-->
+
             <p th:text="'Julkaistu ' + ${newsarticle.date}"></p>
             <p th:text="${newsarticle.text}"></p>
-            <p th:each="category : ${newsarticle.categories}" th:text="${category.name}"></p>
-            
+            Kategoriat:
+            <span th:each="category : ${newsarticle.categories}" th:text="${category.name} +' '"></span>
+
+
         </article>
 
 

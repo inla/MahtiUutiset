@@ -3,6 +3,7 @@ package mahtiuutiset.controller;
 import java.util.ArrayList;
 import java.util.List;
 import javax.annotation.PostConstruct;
+import mahtiuutiset.domain.Author;
 import mahtiuutiset.domain.Category;
 import mahtiuutiset.domain.NewsObject;
 import mahtiuutiset.repository.AuthorRepository;
@@ -73,30 +74,34 @@ public class NewsController {
     
     @PostMapping("/add")
     public String addNews(@RequestParam String title, @RequestParam String lead,
-            @RequestParam String text, @RequestParam String author, 
+            @RequestParam String text, @RequestParam List<String> author, 
             @RequestParam List<String> category) {
         
         List<Category> categories = modifyCategories(category);
+        List<Author> authors = modifyAuthors(author);
         
         NewsObject newsObj = new NewsObject(title, lead, text);
         newsObj.setCategories(categories);
-        //newsObj.setAuthors(authors);
+        newsObj.setAuthors(authors);
         
         newsRepo.save(newsObj);
         
-        for (Category c : categories) { //sama authoreille
+        for (Category c : categories) {
             categoryRepo.findByName(c.getName()).getNews().add(newsObj);
             categoryRepo.save(c);
         }
-        
+        for (Author a : authors) {
+            authorRepo.findByName(a.getName()).getNews().add(newsObj);
+            authorRepo.save(a);
+        }
         
         return "redirect:/";
     }
     
 //    ?
-//    @GetMapping("/categories")
+//    @GetMapping("/kategoria")
 //    public String getCategories(Model model) {
-//        return "";
+//        return "redirect:/";
 //    }
 
     private List<Category> modifyCategories(List<String> categories) {
@@ -115,5 +120,23 @@ public class NewsController {
             categoryList.add(category);
         }
         return categoryList;
+    }
+
+    private List<Author> modifyAuthors(List<String> authors) {
+        List<Author> authorList = new ArrayList();
+        for (String a : authors) {
+            String name = a;
+            if (name.isEmpty()) {
+                continue;
+            }
+            Author author = authorRepo.findByName(name);
+            if (author == null) {
+                author = new Author();
+                author.setName(name);
+                authorRepo.save(author);
+            }
+            authorList.add(author);
+        }
+        return authorList;
     }
 }
