@@ -51,10 +51,11 @@ public class NewsController {
         model.addAttribute("news", newsRepo.findAll(pageable));
         return "index";
     }
-    //   
+       
     @GetMapping("/kategoria/{category}")
-    public String viewCategory(Model model, @PathVariable ("category") String categoryName) {
-        model.addAttribute("category", categoryRepo.findByName(categoryName));
+    public String viewCategory(Model model, @PathVariable String category) {
+        model.addAttribute("category", categoryRepo.findByName(category));
+        //model.addAttribute("news", categoryRepo.findByName(category).getNews());
         return "category";
     }
     
