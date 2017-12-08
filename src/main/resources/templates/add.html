@@ -7,23 +7,23 @@
     <body>
 
         <header th:replace="fragments/header :: header">
-            <p>header with links etc</p>
+            <p>header</p>
         </header>
 
         <h1>Lisää uutinen</h1>
         <div>
             <form th:action="@{/add}" method="POST">
                 Otsikko:<br/> <textarea cols="40" rows="1" name="title" id="title"></textarea><br/>
-                Ingressi:<br/> <textarea cols="40" rows="5" name="lead" id="lead"></textarea><br/>
+                Ingressi:<br/> <textarea cols="40" rows="3" name="lead" id="lead"></textarea><br/>
                 Leipäteksti:<br/> <textarea cols="40" rows="10" name="text" id="text"></textarea><br/>
-                <!--Kuva: <br/>-->
-                Kirjoittaja(t):<br/> <input type="text" name="author" id="author"/><br/>
+                Kuva: <br/> <input type="file" name="picture"/><br/>
+                Kirjoittaja(t):<br/> <input type="text" name="author" id="author" placeholder="Erottele pilkulla"/><br/>
                 Kategoria(t): <br/>
                 <input type="checkbox" name="category" value="Kotimaa"/>Kotimaa
-                <input type="checkbox" name="category"/>Ulkomaa 
-                <input type="checkbox" name="category"/>Kulttuuri
-                <input type="checkbox" name="category"/>Tiede 
-                <input type="checkbox" name="category"/>Urheilu <br/>
+                <input type="checkbox" name="category" value="Ulkomaat"/>Ulkomaat
+                <input type="checkbox" name="category" value="Kulttuuri"/>Kulttuuri
+                <input type="checkbox" name="category" value="Tiede"/>Tiede
+                <input type="checkbox" name="category" value="Urheilu"/>Urheilu <br/>
                 <input type="submit" value="Julkaise"/> <br/>
             </form>
         </div>

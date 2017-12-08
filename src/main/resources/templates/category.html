@@ -5,20 +5,17 @@
         <title> MahtiUutiset – </title>
     </head>
     <body>
-        
-        <header th:replace="fragments/header :: header">
-            <p>header with links etc</p>
-        </header>
-        
-        <!--<h1 th:text="${category.name}"></h1>-->
-        
-        <ul>
-            <li th:each="newsobj : ${news}">
-                <a th:href="@{/{id}(id=${newsobj.id})}" th:text="${newsobj.title}">title</a> 
-                <!--<span th:text="${newsobj.date}">date</span><br/>-->
-            </li>
-        </ul>
 
-        
+        <header th:replace="fragments/header :: header">
+            <p>header</p>
+        </header>
+
+        <h1 th:text="${category.name}">category name</h1>
+<!---->
+<!--        <div th:each="newsobj : ${category.news}">
+            <a th:href="@{/{id}(id=${newsobj.id})}" th:text="${newsobj.title} ${newsobj.date}">title date</a>
+            <br/>
+        </div>-->
+
     </body>
 </html>

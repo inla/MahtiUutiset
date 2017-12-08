@@ -5,14 +5,25 @@
         <title>MahtiUutiset</title>
     </head>
     <body>
-        
+
         <header th:replace="fragments/header :: header">
-            <p>header with links etc</p>
+            <p>header</p>
         </header>
         
-        <h1 th:text=${newsarticle.title}></h1>
+        <article>
+            <h1 th:text="${newsarticle.title}"></h1>
 
-        <h3 th:text="${newsarticle.lead}"></h3>
-        
+            <h3 th:text="${newsarticle.lead}"></h3>
+            <!--kuva, author-->
+            
+            <p th:text="'Julkaistu ' + ${newsarticle.date}"></p>
+            <p th:text="${newsarticle.text}"></p>
+            <p th:each="category : ${newsarticle.categories}" th:text="${category.name}"></p>
+            
+        </article>
+
+
+
+
     </body>
 </html>

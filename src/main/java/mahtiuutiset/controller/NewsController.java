@@ -2,6 +2,7 @@ package mahtiuutiset.controller;
 
 import java.util.ArrayList;
 import java.util.List;
+import javax.annotation.PostConstruct;
 import mahtiuutiset.domain.Category;
 import mahtiuutiset.domain.NewsObject;
 import mahtiuutiset.repository.AuthorRepository;
@@ -29,6 +30,20 @@ public class NewsController {
     
     @Autowired
     private AuthorRepository authorRepo;
+    
+    @PostConstruct
+    private void init() {
+        Category kotimaa = new Category("Kotimaa");
+        categoryRepo.save(kotimaa);
+        Category ulkomaat = new Category("Ulkomaat");
+        categoryRepo.save(ulkomaat);
+        Category kulttuuri = new Category("Kulttuuri");
+        categoryRepo.save(kulttuuri);
+        Category tiede = new Category("Tiede");
+        categoryRepo.save(tiede);
+        Category urheilu = new Category("Urheilu");
+        categoryRepo.save(urheilu);
+    }
 
     @GetMapping("/")
     public String listNewest(Model model) {
@@ -36,11 +51,10 @@ public class NewsController {
         model.addAttribute("news", newsRepo.findAll(pageable));
         return "index";
     }
-        
-    @GetMapping("/kategoriat/{category}")
-    public String viewCategory(Model model, @PathVariable String category) {
-        model.addAttribute("category", categoryRepo.findCategoryByName(category));
-        model.addAttribute("news", categoryRepo.findCategorysNewsByName(category));
+    //   
+    @GetMapping("/kategoria/{category}")
+    public String viewCategory(Model model, @PathVariable ("category") String categoryName) {
+        model.addAttribute("category", categoryRepo.findByName(categoryName));
         return "category";
     }
     
@@ -52,29 +66,25 @@ public class NewsController {
     }
     
     @GetMapping("/add")
-    public String getAddNews() {
+    public String addNews() {
         return "add";
     }
     
     @PostMapping("/add")
-    public String postAddNews(@RequestParam String title, @RequestParam String lead,
+    public String addNews(@RequestParam String title, @RequestParam String lead,
             @RequestParam String text, @RequestParam String author, 
             @RequestParam List<String> category) {
         
         List<Category> categories = modifyCategories(category);
         
-        NewsObject newsObj = new NewsObject();
-        newsObj.setTitle(title);
-        newsObj.setLead(lead);
-        newsObj.setText(text);
+        NewsObject newsObj = new NewsObject(title, lead, text);
         newsObj.setCategories(categories);
-        //ni.setAuthors(authors);
-        //ni.setDate(new LocalDateTime());
+        //newsObj.setAuthors(authors);
         
         newsRepo.save(newsObj);
         
         for (Category c : categories) { //sama authoreille
-            c.getNews().add(newsObj);
+            categoryRepo.findByName(c.getName()).getNews().add(newsObj);
             categoryRepo.save(c);
         }
         
@@ -90,12 +100,12 @@ public class NewsController {
 
     private List<Category> modifyCategories(List<String> categories) {
         List<Category> categoryList = new ArrayList();
-        for (String categ : categories) {
-            String name = categ;
+        for (String c : categories) {
+            String name = c;
             if (name.isEmpty()) {
                 continue;
             }
-            Category category = categoryRepo.findCategoryByName(name);
+            Category category = categoryRepo.findByName(name);
             if (category == null) {
                 category = new Category();
                 category.setName(name);

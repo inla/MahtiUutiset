@@ -1,6 +1,7 @@
 package mahtiuutiset.domain;
 
 import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
 import javax.persistence.Entity;
@@ -19,11 +20,18 @@ public class NewsObject extends AbstractPersistable<Long>{
     private String lead; //ingressi
     private String text;
     //private ? picture;
-    private LocalDateTime date;
+    private String date;
     @ManyToMany
     private List<Category> categories = new ArrayList<>();
     @ManyToMany
     private List<Author> authors = new ArrayList<>();
     private int views = 0;
+
+    public NewsObject(String title, String lead, String text) {
+        this.title = title;
+        this.lead = lead;
+        this.text = text;
+        this.date = LocalDateTime.now().format(DateTimeFormatter.ofPattern("dd.MM.yyyy HH:mm"));
+    }
 
 }

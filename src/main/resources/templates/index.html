@@ -7,18 +7,18 @@
     <body>
         
         <header th:replace="fragments/header :: header">
-            <p>header with links etc</p>
+            <p>header</p>
         </header>
         
         <h1>Etusivu</h1>
 
-        <ul>
-            <li th:each="newsobj : ${news}">
-                <p th:text="${newsobj.title}">Title</p>
-                <p th:text="${newsobj.lead}">Lead</p>
-                <p th:text="${newsobj.text}">Text</p>
+        
+            <div th:each="newsobj : ${news}">
+                <h2 th:text="${newsobj.title}"/>
+                <p th:text="${newsobj.lead}"></p>
+                <!--<p th:text="${newsobj.text}">Text</p>     Kuva!-->
+                <a th:href="@{/{id}(id=${newsobj.id})}">Lue</a> 
                 
-            </li>
-        </ul>
+            </div>
     </body>
 </html>
