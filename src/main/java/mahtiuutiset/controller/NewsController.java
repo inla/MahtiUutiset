@@ -68,19 +68,19 @@ public class NewsController {
         return "index";
     }
     
-    @GetMapping("/uutiset")
+    @GetMapping("/kaikki")
     public String listAll(Model model) {
-        model.addAttribute("list", "Kaikki uutiset");
+        model.addAttribute("listname", "Kaikki uutiset");
         model.addAttribute("news", newsRepo.findAllByOrderByDateDesc());
-        return "category";
+        return "list";
     }
     
     @GetMapping("/kategoria/{category}")
     public String viewCategory(Model model, @PathVariable String category) {
-        //model.addAttribute("list", category);
-        model.addAttribute("category", categoryRepo.findByName(category));
+        model.addAttribute("listname", category);
+        //model.addAttribute("category", categoryRepo.findByName(category));
         model.addAttribute("news", categoryRepo.findByName(category).getNews());
-        return "category";
+        return "list";
     }
     
     @GetMapping("/{id}")
@@ -94,7 +94,7 @@ public class NewsController {
     public String addNews() {
         return "add";
     }
-    //
+    
     @PostMapping("/add")
     public String addNews(@RequestParam String title, @RequestParam String lead,
             @RequestParam String text, @RequestParam List<String> author, 

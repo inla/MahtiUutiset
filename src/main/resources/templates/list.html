@@ -10,12 +10,12 @@
             <p>header</p>
         </header>
 
-        <h1 th:text="${category.name}">category name</h1>
+        <h1 th:text="${listname}">name</h1>
         <!--
         
         -->
-        <div th:each="newsobj : ${category.news}">
-            <a th:href="@{/{id}(id=${newsobj.id})}" th:text="${newsobj.title}">title date</a>
+        <div th:each="newsobj : ${news}">
+            <a th:href="@{/{id}(id=${newsobj.id})}"> <span th:text="${newsobj.title}"/> <span th:text="${newsobj.date}"/></a>
             <br/>
         </div>
 
