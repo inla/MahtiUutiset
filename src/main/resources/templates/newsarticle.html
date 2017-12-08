@@ -10,15 +10,9 @@
             <p>header with links etc</p>
         </header>
         
-        <h1>Etusivu</h1>
+        <h1 th:text=${newsarticle.title}></h1>
 
-        <ul>
-            <li th:each="newsobj : ${news}">
-                <p th:text="${newsobj.title}">Title</p>
-                <p th:text="${newsobj.lead}">Lead</p>
-                <p th:text="${newsobj.text}">Text</p>
-                
-            </li>
-        </ul>
+        <h3 th:text="${newsarticle.lead}"></h3>
+        
     </body>
 </html>

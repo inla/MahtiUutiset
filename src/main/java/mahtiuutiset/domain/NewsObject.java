@@ -14,7 +14,7 @@ import org.springframework.data.jpa.domain.AbstractPersistable;
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
-public class NewsItem extends AbstractPersistable<Long>{
+public class NewsObject extends AbstractPersistable<Long>{
     private String title;
     private String lead; //ingressi
     private String text;

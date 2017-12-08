@@ -17,5 +17,5 @@ public class Category extends AbstractPersistable<Long>{
 
     private String name;
     @ManyToMany(mappedBy = "categories")
-    private List<NewsItem> news = new ArrayList<>();
+    private List<NewsObject> news = new ArrayList<>();
 }

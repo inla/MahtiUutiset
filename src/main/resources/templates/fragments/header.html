@@ -1,0 +1,22 @@
+<!DOCTYPE HTML>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+    <head>
+        <meta charset="UTF-8" />
+        <title>Header template</title>
+    </head>
+    <body>
+ 
+        <header th:fragment="header">
+            <ul>
+                <li><a th:href="@{/}">Etusivu</a></li>
+                <li><a th:href="@{/kategoriat/kotimaa}">Kotimaa</a></li>
+                <li><a th:href="@{/kategoriat/ulkomaat}">Ulkomaat</a></li>
+                <li><a th:href="@{/kategoriat/kulttuuri}">Kulttuuri</a></li>
+                <li><a th:href="@{/kategoriat/tiede}">Tiede</a></li>
+                <li><a th:href="@{/kategoriat/urheilu}">Urheilu</a></li>
+                <li><a th:href="@{/add}">Lisää uutinen</a></li>
+            </ul>
+        </header>
+ 
+    </body>
+</html>

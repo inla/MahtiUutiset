@@ -16,7 +16,7 @@ import org.springframework.data.jpa.domain.AbstractPersistable;
 public class Author extends AbstractPersistable<Long>{
     private String name;
     @ManyToMany
-    private List<NewsItem> news = new ArrayList<>();
+    private List<NewsObject> news = new ArrayList<>();
     
 
 }
