@@ -3,7 +3,6 @@ package mahtiuutiset.controller;
 import java.util.ArrayList;
 import java.util.List;
 import javax.annotation.PostConstruct;
-import javax.persistence.NonUniqueResultException;
 import mahtiuutiset.domain.Author;
 import mahtiuutiset.domain.Category;
 import mahtiuutiset.domain.NewsObject;
@@ -35,29 +34,52 @@ public class NewsController {
     
     @PostConstruct
     private void init() {
-        Category kotimaa = new Category("Kotimaa");
-        categoryRepo.save(kotimaa);
-        Category ulkomaat = new Category("Ulkomaat");
-        categoryRepo.save(ulkomaat);
-        Category kulttuuri = new Category("Kulttuuri");
-        categoryRepo.save(kulttuuri);
-        Category tiede = new Category("Tiede");
-        categoryRepo.save(tiede);
-        Category urheilu = new Category("Urheilu");
-        categoryRepo.save(urheilu);
+//        Category kotimaa = new Category("Kotimaa");
+//        categoryRepo.save(kotimaa);
+//        Category ulkomaat = new Category("Ulkomaat");
+//        categoryRepo.save(ulkomaat);
+//        Category kulttuuri = new Category("Kulttuuri");
+//        categoryRepo.save(kulttuuri);
+//        Category tiede = new Category("Tiede");
+//        categoryRepo.save(tiede);
+//        Category urheilu = new Category("Urheilu");
+//        categoryRepo.save(urheilu);
+        List<String> categories = new ArrayList();
+        categories.add("Kotimaa");
+        categories.add("Ulkomaat");
+        categories.add("Kulttuuri");
+        categories.add("Tiede");
+        categories.add("Urheilu");
+        
+        for (String s : categories) {
+            Category category = categoryRepo.findByName(s);
+            if (category == null) {
+                category = new Category();
+                category.setName(s);
+                categoryRepo.save(category);
+            }
+        }
     }
-
+//
     @GetMapping("/")
     public String listNewest(Model model) {
         Pageable pageable = PageRequest.of(0, 5, Sort.Direction.DESC, "date");
         model.addAttribute("news", newsRepo.findAll(pageable));
         return "index";
     }
-       
+    
+    @GetMapping("/uutiset")
+    public String listAll(Model model) {
+        model.addAttribute("list", "Kaikki uutiset");
+        model.addAttribute("news", newsRepo.findAllByOrderByDateDesc());
+        return "category";
+    }
+    
     @GetMapping("/kategoria/{category}")
-    public String viewCategory(Model model, @PathVariable String category) throws NonUniqueResultException{
+    public String viewCategory(Model model, @PathVariable String category) {
+        //model.addAttribute("list", category);
         model.addAttribute("category", categoryRepo.findByName(category));
-        ///model.addAttribute("news", categoryRepo.findByName(category).getNews());
+        model.addAttribute("news", categoryRepo.findByName(category).getNews());
         return "category";
     }
     
@@ -72,7 +94,7 @@ public class NewsController {
     public String addNews() {
         return "add";
     }
-    
+    //
     @PostMapping("/add")
     public String addNews(@RequestParam String title, @RequestParam String lead,
             @RequestParam String text, @RequestParam List<String> author, 
@@ -99,11 +121,10 @@ public class NewsController {
         return "redirect:/";
     }
     
-//    ?
-//    @GetMapping("/kategoria")
-//    public String getCategories(Model model) {
-//        return "redirect:/";
-//    }
+    @GetMapping("/kategoria")
+    public String redirectCategories() {
+        return "redirect:/";
+    }
 
     private List<Category> modifyCategories(List<String> categories) {
         List<Category> categoryList = new ArrayList();
