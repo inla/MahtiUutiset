@@ -112,11 +112,11 @@ public class NewsController {
                 continue;
             }
             Category category = categoryRepo.findByName(name);
-            if (category == null) {
-                category = new Category();
-                category.setName(name);
-                categoryRepo.save(category);
-            }
+//            if (category == null) {
+//                category = new Category();
+//                category.setName(name);
+//                categoryRepo.save(category);
+//            }
             categoryList.add(category);
         }
         return categoryList;
