@@ -101,17 +101,17 @@ public class NewsController {
         return "add";
     }
 
-    @PostMapping("/add")
+    @PostMapping("/add")//@RequestParam("picture") MultipartFile picture throws IOException
     public String addNews(@RequestParam String title, @RequestParam String lead,
-            @RequestParam String text, @RequestParam("picture") MultipartFile picture,
-            @RequestParam List<String> author, @RequestParam List<String> category) throws IOException {
+            @RequestParam String text, @RequestParam List<String> author, 
+            @RequestParam List<String> category)  {
 
         
         NewsObject newsObj = new NewsObject(title, lead, text);
 
-        if (picture.getBytes() != null) {
-            newsObj.setPicture(picture.getBytes());
-        }
+//        if (picture.getBytes() != null) {
+//            newsObj.setPicture(picture.getBytes());
+//        }
         List<Category> categories = categoryService.modifyCategories(category);
         List<Author> authors = authorService.modifyAuthors(author);
         newsObj.setCategories(categories);
