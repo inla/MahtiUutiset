@@ -30,7 +30,7 @@ public class NewsObject extends AbstractPersistable<Long>{
     private List<Category> categories = new ArrayList<>();
     @ManyToMany
     private List<Author> authors = new ArrayList<>();
-    private int views = 0;
+    private int views;
 
     public NewsObject(String title, String lead, String text, byte[] picture) {
         this.title = title;
@@ -45,6 +45,7 @@ public class NewsObject extends AbstractPersistable<Long>{
         this.lead = lead;
         this.text = text;
         this.date = LocalDateTime.now().format(DateTimeFormatter.ofPattern("dd.MM.yyyy HH:mm"));
+        this.views = 0;
     }
     
     public void increaseViews() {
