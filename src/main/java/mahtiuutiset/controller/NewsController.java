@@ -86,7 +86,7 @@ public class NewsController {
     public String viewOne(Model model, @PathVariable Long id) {
         model.addAttribute("newsarticle", newsService.getOne(id));
         newsService.increaseNewsObjectsViews(id);
-        newsService.addTopListsData(model);
+        //newsService.addTopListsData(model);
         return "newsarticle";
     }
 
