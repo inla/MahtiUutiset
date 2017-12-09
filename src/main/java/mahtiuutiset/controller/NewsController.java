@@ -138,7 +138,6 @@ public class NewsController {
         model.addAttribute("oldarticle", newsService.getOne(id));
         return "edit";
     }
-//
 
     @PostMapping("/{id}/edit")
     public String editNews(@PathVariable Long id, @RequestParam String title, @RequestParam String lead,
