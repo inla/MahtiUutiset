@@ -76,9 +76,9 @@ public class NewsController {
         //model.addAttribute("category", categoryRepo.findByName(category));
         Category c = categoryService.findByName(category);
         if (c != null) {
-            model = model.addAttribute("news", c.getNews());
+            model.addAttribute("news", c.getNews());
         }
-        newsService.addFooterData(model);
+        //newsService.addFooterData(model);
         return "list";
     }
     

@@ -29,7 +29,7 @@ public class CategoryService {
             if (category == null) {
                 category = new Category();
                 category.setName(name);
-                categoryRepo.save(category);
+                save(category);
             }
             categoryList.add(category);
         }
