@@ -75,12 +75,10 @@ public class NewsController {
     @GetMapping("/kategoria/{category}")
     public String viewCategory(Model model, @PathVariable String category) {
         model.addAttribute("listname", category);
-        //model.addAttribute("category", categoryRepo.findByName(category));
         Category c = categoryService.findByName(category);
         if (c != null) {
             model.addAttribute("news", c.getNews());
         }
-        //newsService.addFooterData(model);
         return "list";
     }
 
@@ -88,7 +86,7 @@ public class NewsController {
     public String viewOne(Model model, @PathVariable Long id) {
         model.addAttribute("newsarticle", newsService.getOne(id));
         newsService.increaseNewsObjectsViews(id);
-        newsService.addFooterData(model);
+        newsService.addTopListsData(model);
         return "newsarticle";
     }
 

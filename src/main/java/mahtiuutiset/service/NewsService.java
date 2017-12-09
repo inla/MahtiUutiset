@@ -39,7 +39,7 @@ public class NewsService {
         save(newsRepo.getOne(id));
     }
 
-    public void addFooterData(Model model) {
+    public void addTopListsData(Model model) {
         model.addAttribute("newest", findNewest(10));
         model.addAttribute("popularest", findMostPopular(10));
     }

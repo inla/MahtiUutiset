@@ -24,7 +24,7 @@
                     <div th:if="${newsobj.picture} != null">
                         <img th:src="@{/{id}/picture(id=${newsobj.id})}" alt="Kuva"/><br/>
                     </div>
-                    <h3 th:text="${newsobj.lead}"></h3>
+                    <h4 th:text="${newsobj.lead}"></h4>
                 </a> 
 
             </div>
