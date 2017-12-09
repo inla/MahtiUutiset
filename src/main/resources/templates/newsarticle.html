@@ -22,7 +22,9 @@
                     <article>
                         <h1 th:text="${newsarticle.title}"></h1>
                         <h3 th:text="${newsarticle.lead}"></h3>
-                        <img th:src="@{/{id}/picture(id=${newsarticle.id})}" alt="Kuva"/><br/>
+                        <div th:if="${newsarticle.picture} != null">
+                            <img th:src="@{/{id}/picture(id=${newsarticle.id})}" alt="Kuva"/><br/>
+                        </div>
                         Kirjoittajat:
                         <div th:each="author : ${newsarticle.authors}" th:text="${author.name}"></div>
                         <p th:text="'Julkaistu ' + ${newsarticle.date}"></p>
