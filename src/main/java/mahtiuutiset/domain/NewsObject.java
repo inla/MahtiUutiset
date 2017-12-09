@@ -22,7 +22,7 @@ public class NewsObject extends AbstractPersistable<Long>{
     private String title;
     private String lead; //ingressi
     private String text;
-    //@Lob heroku ongelma
+    @Lob //heroku ongelma
     @Basic(fetch = FetchType.LAZY)
     private byte[] picture;
     private String date;
