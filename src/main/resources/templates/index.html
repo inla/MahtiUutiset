@@ -21,7 +21,9 @@
             <div th:each="newsobj : ${news}">
                 <a th:href="@{/{id}(id=${newsobj.id})}">
                     <h2 th:text="${newsobj.title}"/>
-                    <img th:src="@{/{id}/picture(id=${newsobj.id})}" alt="Kuva"/><br/>
+                    <div th:if="${newsobj.picture} != null">
+                        <img th:src="@{/{id}/picture(id=${newsobj.id})}" alt="Kuva"/><br/>
+                    </div>
                     <h3 th:text="${newsobj.lead}"></h3>
                 </a> 
 

@@ -24,13 +24,13 @@ public class NewsController {
 
     @Autowired
     private NewsService newsService;
-    
+
     @Autowired
     private CategoryService categoryService;
-    
+
     @Autowired
     private AuthorService authorService;
-    
+
 //    @PostConstruct
 //    private void init() {
 ////        Category kotimaa = new Category("Kotimaa");
@@ -59,20 +59,19 @@ public class NewsController {
 //            }
 //        }
 //    }
-
     @GetMapping("/")
     public String listNewest(Model model) {
         model.addAttribute("news", newsService.findNewest(5));
         return "index";
     }
-    
+
     @GetMapping("/kaikki")
     public String listAll(Model model) {
         model.addAttribute("listname", "Kaikki uutiset");
         model.addAttribute("news", newsService.findAllInDateOrder());
         return "list";
     }
-    
+
     @GetMapping("/kategoria/{category}")
     public String viewCategory(Model model, @PathVariable String category) {
         model.addAttribute("listname", category);
@@ -84,7 +83,7 @@ public class NewsController {
         //newsService.addFooterData(model);
         return "list";
     }
-    
+
     @GetMapping("/{id}")
     public String viewOne(Model model, @PathVariable Long id) {
         model.addAttribute("newsarticle", newsService.getOne(id));
@@ -92,41 +91,74 @@ public class NewsController {
         newsService.addFooterData(model);
         return "newsarticle";
     }
-    
+
     @GetMapping(path = "/{id}/picture", produces = "image/png")
     @ResponseBody
     public byte[] getPicture(@PathVariable Long id) {
         return newsService.getOne(id).getPicture();
-}
-    
+    }
+
     @GetMapping("/add")
     public String addNews() {
         return "add";
     }
-    
+
     @PostMapping("/add")
     public String addNews(@RequestParam String title, @RequestParam String lead,
-            @RequestParam String text, @RequestParam ("picture") MultipartFile picture, 
+            @RequestParam String text, @RequestParam("picture") MultipartFile picture,
             @RequestParam List<String> author, @RequestParam List<String> category) throws IOException {
+
         
+        NewsObject newsObj = new NewsObject(title, lead, text);
+
+        if (picture.getBytes() != null) {
+            newsObj.setPicture(picture.getBytes());
+        }
         List<Category> categories = categoryService.modifyCategories(category);
         List<Author> authors = authorService.modifyAuthors(author);
-        
-        NewsObject newsObj = new NewsObject(title, lead, text, picture.getBytes());
         newsObj.setCategories(categories);
         newsObj.setAuthors(authors);
-        
         newsService.save(newsObj);
-        
         categoryService.addNewsToCategories(categories, newsObj);
         authorService.addNewsToAuthors(authors, newsObj);
-        
+
         return "redirect:/";
     }
-    
+
     @GetMapping("/kategoria")
     public String redirectCategories() {
         return "redirect:/";
+    }
+
+    @GetMapping("/{id}/edit")
+    public String editNews(Model model, @PathVariable Long id) {
+        if (newsService.getOne(id) == null) {
+            return "redirect:/";
+        }
+        model.addAttribute("oldarticle", newsService.getOne(id));
+        return "edit";
+    }
+//
+
+    @PostMapping("/{id}/edit")
+    public String editNews(@PathVariable Long id, @RequestParam String title, @RequestParam String lead,
+            @RequestParam String text, @RequestParam("picture") MultipartFile picture,
+            @RequestParam List<String> author, @RequestParam List<String> category) throws IOException {
+
+        NewsObject newsObj = newsService.getOne(id);
+
+        if (newsObj == null) {
+            return "redirect:/";
+        }
+        newsObj.setTitle(title);
+        newsObj.setLead(lead);
+        newsObj.setText(text);
+        if (picture.getBytes() != null) {
+            newsObj.setPicture(picture.getBytes());
+        }
+        newsService.save(newsObj);
+
+        return "redirect:/" + id;
     }
 
 }

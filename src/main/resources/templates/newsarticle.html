@@ -32,6 +32,7 @@
                         Kategoriat:
                         <span th:each="category : ${newsarticle.categories}" th:text="${category.name} +' '"></span>
                     </article>
+                    <a th:href="@{/{id}/edit(id=${newsarticle.id})}">Muokkaa</a>
                 </div>
 
             </div>
