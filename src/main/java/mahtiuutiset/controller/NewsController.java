@@ -142,8 +142,7 @@ public class NewsController {
 
     @PostMapping("/{id}/edit")
     public String editNews(@PathVariable Long id, @RequestParam String title, @RequestParam String lead,
-            @RequestParam String text, @RequestParam("picture") MultipartFile picture,
-            @RequestParam List<String> author, @RequestParam List<String> category) throws IOException {
+            @RequestParam String text, @RequestParam("picture") MultipartFile picture) throws IOException {
 
         NewsObject newsObj = newsService.getOne(id);
 
