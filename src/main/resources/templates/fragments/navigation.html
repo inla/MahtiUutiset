@@ -1,0 +1,29 @@
+<!DOCTYPE HTML>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1"/>
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"/>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+        <title>Navigation template</title>
+    </head>
+    <body>
+
+        <header th:fragment="navigation">
+            <div align="center">
+                <h1>MahtiUutiset</h1>
+                <span><a th:href="@{/}">Etusivu</a></span>
+                <span><a th:href="@{/kategoria/Kotimaa}">Kotimaa</a></span>
+                <span><a th:href="@{/kategoria/Ulkomaat}">Ulkomaat</a></span>
+                <span><a th:href="@{/kategoria/Kulttuuri}">Kulttuuri</a></span>
+                <span><a th:href="@{/kategoria/Tiede}">Tiede</a></span>
+                <span><a th:href="@{/kategoria/Urheilu}">Urheilu</a></span>
+                <span><a th:href="@{/kaikki}">Kaikki uutiset</a></span>
+                <span><a th:href="@{/add}">Lisää uutinen</a></span>
+            </div>
+            <br/><br/>
+        </header>
+
+    </body>
+</html>

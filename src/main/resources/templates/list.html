@@ -2,20 +2,25 @@
 <html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
     <head>
         <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1"/>
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"/>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
         <title> MahtiUutiset – </title>
     </head>
     <body>
 
-        <header th:replace="fragments/header :: header">
-            <p>header</p>
+        <header th:replace="fragments/navigation :: navigation">
+            <p>navigation</p>
         </header>
+        <div align="center">
+            <h1 th:text="${listname}">name</h1>
 
-        <h1 th:text="${listname}">name</h1>
-
-        <div th:if="${news} != null">
-            <div th:each="newsobj : ${news}">
-                <a th:href="@{/{id}(id=${newsobj.id})}"> <span th:text="${newsobj.title}"/> <span th:text="${newsobj.date}"/></a>
-                <br/>
+            <div th:if="${news} != null">
+                <div th:each="newsobj : ${news}">
+                    <a th:href="@{/{id}(id=${newsobj.id})}"> <span th:text="${newsobj.title}"/> <span th:text="${newsobj.date}"/></a>
+                    <br/>
+                </div>
             </div>
         </div>
     </body>

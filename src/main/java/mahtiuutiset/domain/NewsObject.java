@@ -4,7 +4,10 @@ import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
+import javax.persistence.Basic;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.Lob;
 import javax.persistence.ManyToMany;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -19,7 +22,9 @@ public class NewsObject extends AbstractPersistable<Long>{
     private String title;
     private String lead; //ingressi
     private String text;
-    //private ? picture;
+    @Lob
+    @Basic(fetch = FetchType.LAZY)
+    private byte[] picture;
     private String date;
     @ManyToMany
     private List<Category> categories = new ArrayList<>();
@@ -27,10 +32,11 @@ public class NewsObject extends AbstractPersistable<Long>{
     private List<Author> authors = new ArrayList<>();
     private int views = 0;
 
-    public NewsObject(String title, String lead, String text) {
+    public NewsObject(String title, String lead, String text, byte[] picture) {
         this.title = title;
         this.lead = lead;
         this.text = text;
+        this.picture = picture;
         this.date = LocalDateTime.now().format(DateTimeFormatter.ofPattern("dd.MM.yyyy HH:mm"));
     }
     

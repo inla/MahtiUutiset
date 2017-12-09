@@ -2,23 +2,30 @@
 <html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
     <head>
         <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1"/>
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"/>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
         <title>MahtiUutiset</title>
     </head>
     <body>
-        
-        <header th:replace="fragments/header :: header">
-            <p>header</p>
-        </header>
-        
-        <h1>Etusivu</h1>
 
-        
+        <header th:replace="fragments/navigation :: navigation">
+            <p>navigation</p>
+        </header>
+
+        <div align="center">
+
+            <h1>Etusivu</h1>
+
             <div th:each="newsobj : ${news}">
-                <h2 th:text="${newsobj.title}"/>
-                <p th:text="${newsobj.lead}"></p>
-                <!--<p th:text="${newsobj.text}">Text</p>     Kuva!-->
-                <a th:href="@{/{id}(id=${newsobj.id})}">Lue</a> 
-                
+                <a th:href="@{/{id}(id=${newsobj.id})}">
+                    <h2 th:text="${newsobj.title}"/>
+                    <img th:src="@{/{id}/picture(id=${newsobj.id})}" alt="Kuva"/><br/>
+                    <h3 th:text="${newsobj.lead}"></h3>
+                </a> 
+
             </div>
+        </div>
     </body>
 </html>

@@ -2,35 +2,40 @@
 <html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
     <head>
         <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1"/>
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"/>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
         <title>MahtiUutiset</title>
     </head>
     <body>
 
-        <header th:replace="fragments/header :: header">
-            <p>header</p>
+        <header th:replace="fragments/navigation :: navigation">
+            <p>navigation</p>
         </header>
-
-        <h1>Lisää uutinen</h1>
-        <div>
-            <form th:action="@{/add}" method="POST">
-                <h3>Otsikko:</h3>
-                <textarea cols="40" rows="1" name="title" id="title"></textarea><br/>
-                <h3>Ingressi:</h3>
-                <textarea cols="40" rows="3" name="lead" id="lead"></textarea><br/>
-                <h3>Leipäteksti:</h3>
-                <textarea cols="40" rows="10" name="text" id="text"></textarea><br/>
-                <h3>Kuva:</h3>
-                <input type="file" name="picture"/><br/>
-                <h3>Kirjoittaja(t):</h3>
-                <input type="text" name="author" id="author" placeholder="Erottele pilkulla"/><br/>
-                <h3>Kategoria(t):</h3>
-                <input type="checkbox" name="category" value="Kotimaa"/>Kotimaa
-                <input type="checkbox" name="category" value="Ulkomaat"/>Ulkomaat
-                <input type="checkbox" name="category" value="Kulttuuri"/>Kulttuuri
-                <input type="checkbox" name="category" value="Tiede"/>Tiede
-                <input type="checkbox" name="category" value="Urheilu"/>Urheilu <br/>
-                <input type="submit" value="Julkaise"/> <br/>
-            </form>
+        <div align="center">
+            <h1>Lisää uutinen</h1><br/>
+            <div>
+                <form th:action="@{/add}" method="POST" enctype="multipart/form-data">
+                    <p>Otsikko:</p>
+                    <textarea cols="50" rows="1" name="title" id="title"></textarea><br/><br/>
+                    <p>Ingressi:</p>
+                    <textarea cols="50" rows="2" name="lead" id="lead"></textarea><br/><br/>
+                    <p>Leipäteksti:</p>
+                    <textarea cols="50" rows="10" name="text" id="text"></textarea><br/><br/>
+                    <span>Kuva:</span>
+                    <input type="file" name="picture" id="picture"/><br/><br/>
+                    <span>Kirjoittaja(t):</span>
+                    <input type="text" name="author" id="author" placeholder="Erottele pilkulla"/><br/><br/>
+                    <p>Kategoria(t):</p>
+                    <input type="checkbox" name="category" value="Kotimaa"/>Kotimaa
+                    <input type="checkbox" name="category" value="Ulkomaat"/>Ulkomaat
+                    <input type="checkbox" name="category" value="Kulttuuri"/>Kulttuuri
+                    <input type="checkbox" name="category" value="Tiede"/>Tiede
+                    <input type="checkbox" name="category" value="Urheilu"/>Urheilu <br/><br/>
+                    <input type="submit" value="Julkaise"/> <br/><br/>
+                </form>
+            </div>
         </div>
 
     </body>

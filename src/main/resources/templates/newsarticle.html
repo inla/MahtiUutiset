@@ -2,34 +2,49 @@
 <html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
     <head>
         <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1"/>
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"/>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
         <title>MahtiUutiset</title>
     </head>
     <body>
 
-        <header th:replace="fragments/header :: header">
-            <p>header</p>
+        <header th:replace="fragments/navigation :: navigation">
+            <p>navigation</p>
         </header>
 
-        <article>
-            <h1 th:text="${newsarticle.title}"></h1>
-            <h3 th:text="${newsarticle.lead}"></h3>
-            <!--kuva, -->
-            Kirjoittajat:
-            <div th:each="author : ${newsarticle.authors}" th:text="${author.name}"></div>
-            <p th:text="'Julkaistu ' + ${newsarticle.date}"></p>
-            <p th:text="${newsarticle.text}"></p>
-            Kategoriat:
-            <span th:each="category : ${newsarticle.categories}" th:text="${category.name} +' '"></span>
+        <div class="row">
+
+            <div class="col-sm-8">
+
+                <div align="center">
+                    <article>
+                        <h1 th:text="${newsarticle.title}"></h1>
+                        <h3 th:text="${newsarticle.lead}"></h3>
+                        <img th:src="@{/{id}/picture(id=${newsarticle.id})}" alt="Kuva"/><br/>
+                        Kirjoittajat:
+                        <div th:each="author : ${newsarticle.authors}" th:text="${author.name}"></div>
+                        <p th:text="'Julkaistu ' + ${newsarticle.date}"></p>
+                        <br/>
+                        <p th:text="${newsarticle.text}"></p>
+                        <br/>
+                        Kategoriat:
+                        <span th:each="category : ${newsarticle.categories}" th:text="${category.name} +' '"></span>
+                    </article>
+                </div>
+
+            </div>
 
 
-        </article>
-        
-        <br/>
-        <br/>
+            <div class="col-sm-4">
 
-        <header th:replace="fragments/footer :: footer">
-            <p>footer</p>
-        </header>
+                <header th:replace="fragments/toplists :: toplists">
+                    <p>footer</p>
+                </header>
+
+            </div>
+        </div> 
 
     </body>
 </html>

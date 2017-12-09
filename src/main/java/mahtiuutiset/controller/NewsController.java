@@ -1,5 +1,6 @@
 package mahtiuutiset.controller;
 
+import java.io.IOException;
 import java.util.List;
 import javax.annotation.PostConstruct;
 import mahtiuutiset.domain.Author;
@@ -15,6 +16,8 @@ import org.springframework.web.bind.annotation.RequestParam;
 import mahtiuutiset.service.AuthorService;
 import mahtiuutiset.service.CategoryService;
 import mahtiuutiset.service.NewsService;
+import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.multipart.MultipartFile;
 
 @Controller
 public class NewsController {
@@ -56,7 +59,7 @@ public class NewsController {
 //            }
 //        }
 //    }
-//
+
     @GetMapping("/")
     public String listNewest(Model model) {
         model.addAttribute("news", newsService.findNewest(5));
@@ -90,6 +93,12 @@ public class NewsController {
         return "newsarticle";
     }
     
+    @GetMapping(path = "/{id}/picture", produces = "image/png")
+    @ResponseBody
+    public byte[] getPicture(@PathVariable Long id) {
+        return newsService.getOne(id).getPicture();
+}
+    
     @GetMapping("/add")
     public String addNews() {
         return "add";
@@ -97,13 +106,13 @@ public class NewsController {
     
     @PostMapping("/add")
     public String addNews(@RequestParam String title, @RequestParam String lead,
-            @RequestParam String text, @RequestParam List<String> author, 
-            @RequestParam List<String> category) {
+            @RequestParam String text, @RequestParam ("picture") MultipartFile picture, 
+            @RequestParam List<String> author, @RequestParam List<String> category) throws IOException {
         
         List<Category> categories = categoryService.modifyCategories(category);
         List<Author> authors = authorService.modifyAuthors(author);
         
-        NewsObject newsObj = new NewsObject(title, lead, text);
+        NewsObject newsObj = new NewsObject(title, lead, text, picture.getBytes());
         newsObj.setCategories(categories);
         newsObj.setAuthors(authors);
         
