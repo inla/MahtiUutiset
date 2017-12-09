@@ -33,5 +33,9 @@ public class NewsObject extends AbstractPersistable<Long>{
         this.text = text;
         this.date = LocalDateTime.now().format(DateTimeFormatter.ofPattern("dd.MM.yyyy HH:mm"));
     }
+    
+    public void increaseViews() {
+        this.views++;
+    }
 
 }
