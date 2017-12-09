@@ -17,8 +17,9 @@
             <h1 th:text="${listname}">name</h1>
             <br/><br/>
             <!--<div th:if="${news} != null">-->
-                <div th:each="newsobj : ${news}">
-                    <a th:href="@{/{id}(id=${newsobj.id})}"> <span th:text="${newsobj.title}"/> <span th:text="${newsobj.date}"/></a>
+                <div th:each="newsobj : ${news}"><
+                    <span th:text="${newsobj.title}"/> <span th:text="${newsobj.date}"/>
+                    <a th:href="@{/{id}(id=${newsobj.id})}">Lue</a>
                     <br/>
                 </div>
             <!--</div>-->

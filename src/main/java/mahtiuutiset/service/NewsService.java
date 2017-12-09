@@ -18,6 +18,9 @@ public class NewsService {
     private NewsObjectRepository newsRepo;
 
     public Page<NewsObject> findNewest(int howMany) {
+        if (howMany >= newsRepo.findAll().size()) {
+            howMany = newsRepo.findAll().size();
+        }
         Pageable pageable = PageRequest.of(0, howMany, Sort.Direction.DESC, "date");
         return newsRepo.findAll(pageable);
     }
@@ -45,6 +48,9 @@ public class NewsService {
     }
 
     private Object findMostPopular(int howMany) {
+        if (howMany >= newsRepo.findAll().size()) {
+            howMany = newsRepo.findAll().size();
+        }
         Pageable pageable = PageRequest.of(0, howMany, Sort.Direction.DESC, "views");
         return newsRepo.findAll(pageable);
     }
