@@ -90,11 +90,11 @@ public class NewsController {
         return "newsarticle";
     }
 
-    @GetMapping(path = "/{id}/picture", produces = "image/png")
-    @ResponseBody
-    public byte[] getPicture(@PathVariable Long id) {
-        return newsService.getOne(id).getPicture();
-    }
+//    @GetMapping(path = "/{id}/picture", produces = "image/png")
+//    @ResponseBody
+//    public byte[] getPicture(@PathVariable Long id) {
+//        return newsService.getOne(id).getPicture();
+//    }
 
     @GetMapping("/add")
     public String addNews() {
@@ -137,9 +137,9 @@ public class NewsController {
         return "edit";
     }
 
-    @PostMapping("/{id}/edit")
+    @PostMapping("/{id}/edit")//@RequestParam("picture") MultipartFile picture throws IOException
     public String editNews(@PathVariable Long id, @RequestParam String title, @RequestParam String lead,
-            @RequestParam String text, @RequestParam("picture") MultipartFile picture) throws IOException {
+            @RequestParam String text)  {
 
         NewsObject newsObj = newsService.getOne(id);
 
@@ -149,9 +149,9 @@ public class NewsController {
         newsObj.setTitle(title);
         newsObj.setLead(lead);
         newsObj.setText(text);
-        if (picture.getBytes() != null) {
-            newsObj.setPicture(picture.getBytes());
-        }
+//        if (picture.getBytes() != null) {
+//            newsObj.setPicture(picture.getBytes());
+//        }
         newsService.save(newsObj);
 
         return "redirect:/" + id;
