@@ -22,19 +22,20 @@
                     <article>
                         <h1 th:text="${newsarticle.title}"></h1>
                         <h3 th:text="${newsarticle.lead}"></h3>
-<!--                        <div th:if="${newsarticle.picture} != null">
-                            <img th:src="@{/{id}/picture(id=${newsarticle.id})}" alt="Kuva"/><br/>
+                        <!--<div th:if="${newsarticle.picture} != null">
+                                <img th:src="@{/{id}/picture(id=${newsarticle.id})}" alt="Kuva"/><br/>
                         </div>-->
+                        <p th:text="'Julkaistu ' + ${newsarticle.date}"></p>
                         Kirjoittajat:
                         <div th:each="author : ${newsarticle.authors}" th:text="${author.name}"></div>
-                        <p th:text="'Julkaistu ' + ${newsarticle.date}"></p>
-                        <br/>
+                        <br/><br/>
                         <p th:text="${newsarticle.text}"></p>
                         <br/>
                         Kategoriat:
                         <span th:each="category : ${newsarticle.categories}" th:text="${category.name} +' '"></span>
                     </article>
-                    <a th:href="@{/{id}/edit(id=${newsarticle.id})}">Muokkaa</a>
+                    <br/><br/>
+                    <a th:href="@{/{id}/edit(id=${newsarticle.id})}">Muokkaa uutista</a>
                 </div>
 
             </div>
@@ -42,9 +43,9 @@
 
             <div class="col-sm-4">
 
-<!--                <header th:replace="fragments/toplists :: toplists">
+                <header th:replace="fragments/toplists :: toplists">
                     <p>footer</p>
-                </header>-->
+                </header>
 
             </div>
         </div> 

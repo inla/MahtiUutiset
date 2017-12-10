@@ -31,34 +31,6 @@ public class NewsController {
     @Autowired
     private AuthorService authorService;
 
-//    @PostConstruct
-//    private void init() {
-////        Category kotimaa = new Category("Kotimaa");
-////        categoryRepo.save(kotimaa);
-////        Category ulkomaat = new Category("Ulkomaat");
-////        categoryRepo.save(ulkomaat);
-////        Category kulttuuri = new Category("Kulttuuri");
-////        categoryRepo.save(kulttuuri);
-////        Category tiede = new Category("Tiede");
-////        categoryRepo.save(tiede);
-////        Category urheilu = new Category("Urheilu");
-////        categoryRepo.save(urheilu);
-//        List<String> categories = new ArrayList();
-//        categories.add("Kotimaa");
-//        categories.add("Ulkomaat");
-//        categories.add("Kulttuuri");
-//        categories.add("Tiede");
-//        categories.add("Urheilu");
-//        
-//        for (String s : categories) {
-//            Category category = categoryRepo.findByName(s);
-//            if (category == null) {
-//                category = new Category();
-//                category.setName(s);
-//                categoryRepo.save(category);
-//            }
-//        }
-//    }
     @GetMapping("/")
     public String listNewest(Model model) {
         model.addAttribute("news", newsService.findNewest(5));
@@ -86,7 +58,7 @@ public class NewsController {
     public String viewOne(Model model, @PathVariable Long id) {
         newsService.increaseNewsObjectsViews(id);
         model.addAttribute("newsarticle", newsService.getOne(id));
-        //newsService.addTopListsData(model);
+        newsService.addTopListsData(model);
         return "newsarticle";
     }
 
