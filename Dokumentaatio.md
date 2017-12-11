@@ -14,5 +14,6 @@
 * Kirjautuminen
 * Uutisten lisäys ja muokkaus mahdollista vain kirjautuneena
 * Kuvaominaisuus poistettu (ei saatu toimimaan herokun puolella)
-* 
+* Validointi
+* Testit
 
