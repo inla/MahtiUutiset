@@ -22,8 +22,6 @@ MahtiUutiset on uutissivusto, jossa voi lukea, listata ja luoda uutisia.
 * Testit erittäin vähäisiä
   * Testikattavuutta pitäisi mahdollisessa jatkokehityksessä parantaa huomattavasti
   * Seleniumia ei saatu toimimaan
-  * jacoco?
-* 
 
 ### Asennus- ja käyttöohje
 * Sovellus toimii osoitteessa http://mahtiuutiset.herokuapp.com
