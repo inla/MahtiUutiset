@@ -12,7 +12,7 @@ MahtiUutiset on uutissivusto, jossa voi lukea ja luoda uutisia.
 * Käyttäjä voi muokata uutista
 
 ### Tietokantakaavio
-
+![Alt text](/Dokumentaatio/tietokantakaavio.png)
 
 ### Puuttuvat ominaisuudet ja parannusehdotuksia 
 * Kuvaominaisuus poistettu (ei saatu toimimaan herokun puolella)
