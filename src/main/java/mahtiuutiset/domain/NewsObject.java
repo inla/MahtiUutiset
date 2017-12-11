@@ -26,10 +26,9 @@ public class NewsObject extends AbstractPersistable<Long>{
     private String lead; //ingressi
     
     private String text;
-    
-    @Lob //heroku ongelma
-    @Basic(fetch = FetchType.LAZY)
-    private byte[] picture;
+//    //@Lob //heroku ongelma
+//    @Basic(fetch = FetchType.LAZY)
+//    private byte[] picture;
     
     private String date;
     
@@ -39,14 +38,6 @@ public class NewsObject extends AbstractPersistable<Long>{
     @ManyToMany
     private List<Author> authors = new ArrayList<>();
     private int views;
-
-//    public NewsObject(String title, String lead, String text, byte[] picture) {
-//        this.title = title;
-//        this.lead = lead;
-//        this.text = text;
-//        this.picture = picture;
-//        this.date = LocalDateTime.now().format(DateTimeFormatter.ofPattern("dd.MM.yyyy HH:mm"));
-//    }
 
     public NewsObject(String title, String lead, String text) {
         this.title = title;
