@@ -2,7 +2,6 @@ package mahtiuutiset.controller;
 
 import java.io.IOException;
 import java.util.List;
-import javax.annotation.PostConstruct;
 import mahtiuutiset.domain.Author;
 import mahtiuutiset.domain.Category;
 import mahtiuutiset.domain.NewsObject;
@@ -19,6 +18,9 @@ import mahtiuutiset.service.NewsService;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
+/**
+ * Kontrolleri.
+ */
 @Controller
 public class NewsController {
 
@@ -31,12 +33,24 @@ public class NewsController {
     @Autowired
     private AuthorService authorService;
 
+    /**
+     * Luo etusivun.
+     *
+     * @param model
+     * @return
+     */
     @GetMapping("/")
     public String listNewest(Model model) {
         model.addAttribute("news", newsService.findNewest(5));
         return "index";
     }
 
+    /**
+     * Listaa kaikki uutiset.
+     *
+     * @param model
+     * @return
+     */
     @GetMapping("/kaikki")
     public String listAll(Model model) {
         model.addAttribute("listname", "Kaikki uutiset");
@@ -44,6 +58,13 @@ public class NewsController {
         return "list";
     }
 
+    /**
+     * Listaa uutiset kategorian perusteella.
+     *
+     * @param model
+     * @param category
+     * @return
+     */
     @GetMapping("/kategoria/{category}")
     public String viewCategory(Model model, @PathVariable String category) {
         model.addAttribute("listname", category);
@@ -54,6 +75,13 @@ public class NewsController {
         return "list";
     }
 
+    /**
+     * Luo sivun yksittäiselle uutiselle.
+     *
+     * @param model
+     * @param id
+     * @return
+     */
     @GetMapping("/{id}")
     public String viewOne(Model model, @PathVariable Long id) {
         newsService.increaseNewsObjectsViews(id);
@@ -67,18 +95,31 @@ public class NewsController {
 //    public byte[] getPicture(@PathVariable Long id) {
 //        return newsService.getOne(id).getPicture();
 //    }
-
+    /**
+     * Ohjaa uutisen lisäyssivulle.
+     *
+     * @return
+     */
     @GetMapping("/add")
     public String addNews() {
         return "add";
     }
 
+    /**
+     * Luo uutisen.
+     *
+     * @param title
+     * @param lead
+     * @param text
+     * @param author
+     * @param category
+     * @return
+     */
     @PostMapping("/add")//@RequestParam("picture") MultipartFile picture throws IOException
     public String addNews(@RequestParam String title, @RequestParam String lead,
-            @RequestParam String text, @RequestParam List<String> author, 
-            @RequestParam List<String> category)  {
+            @RequestParam String text, @RequestParam List<String> author,
+            @RequestParam List<String> category) {
 
-        
         NewsObject newsObj = new NewsObject(title, lead, text);
 
 //        if (picture.getBytes() != null) {
@@ -95,11 +136,23 @@ public class NewsController {
         return "redirect:/";
     }
 
+    /**
+     * Uudelleenohjaa etusivulle.
+     *
+     * @return
+     */
     @GetMapping("/kategoria")
     public String redirectCategories() {
         return "redirect:/";
     }
 
+    /**
+     * Palauttaa uutisen muokkaus sivun.
+     *
+     * @param model
+     * @param id
+     * @return
+     */
     @GetMapping("/{id}/edit")
     public String editNews(Model model, @PathVariable Long id) {
         if (newsService.getOne(id) == null) {
@@ -109,9 +162,18 @@ public class NewsController {
         return "edit";
     }
 
+    /**
+     * Muokkaa uutista.
+     *
+     * @param id
+     * @param title
+     * @param lead
+     * @param text
+     * @return
+     */
     @PostMapping("/{id}/edit")//@RequestParam("picture") MultipartFile picture throws IOException
     public String editNews(@PathVariable Long id, @RequestParam String title, @RequestParam String lead,
-            @RequestParam String text)  {
+            @RequestParam String text) {
 
         NewsObject newsObj = newsService.getOne(id);
 

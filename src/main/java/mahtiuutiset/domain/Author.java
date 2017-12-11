@@ -9,14 +9,17 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.springframework.data.jpa.domain.AbstractPersistable;
 
+/**
+ * Kirjoittaja-luokka.
+ */
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
-public class Author extends AbstractPersistable<Long>{
+public class Author extends AbstractPersistable<Long> {
+
     private String name;
     @ManyToMany
     private List<NewsObject> news = new ArrayList<>();
-    
 
 }

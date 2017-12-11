@@ -8,6 +8,9 @@ import mahtiuutiset.repository.CategoryRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+/**
+ * Palvelu kategorioille.
+ */
 @Service
 public class CategoryService {
 
@@ -18,6 +21,11 @@ public class CategoryService {
         return categoryRepo.findByName(category);
     }
 
+    /**
+     * Lisää mahdolliset uudet kategoriat tietokantaan.
+     * @param categories
+     * @return 
+     */
     public List<Category> modifyCategories(List<String> categories) {
         List<Category> categoryList = new ArrayList();
         for (String c : categories) {
@@ -40,6 +48,11 @@ public class CategoryService {
         categoryRepo.save(c);
     }
 
+    /**
+     * Lisää uutisen sen kategorioiden uutislistoihin.
+     * @param categories
+     * @param newsObj 
+     */
     public void addNewsToCategories(List<Category> categories, NewsObject newsObj) {
         for (Category c : categories) {
             findByName(c.getName()).getNews().add(newsObj);

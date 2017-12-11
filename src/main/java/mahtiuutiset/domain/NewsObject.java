@@ -9,32 +9,34 @@ import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.Lob;
 import javax.persistence.ManyToMany;
-import javax.validation.constraints.NotEmpty;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.springframework.data.jpa.domain.AbstractPersistable;
 
+/**
+ * Uutinen.
+ */
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
-public class NewsObject extends AbstractPersistable<Long>{
-    
+public class NewsObject extends AbstractPersistable<Long> {
+
     private String title;
-    
+
     private String lead; //ingressi
-    
+
     private String text;
 //    //@Lob //heroku ongelma
 //    @Basic(fetch = FetchType.LAZY)
 //    private byte[] picture;
-    
+
     private String date;
-    
+
     @ManyToMany
     private List<Category> categories = new ArrayList<>();
-    
+
     @ManyToMany
     private List<Author> authors = new ArrayList<>();
     private int views;
@@ -46,7 +48,10 @@ public class NewsObject extends AbstractPersistable<Long>{
         this.date = LocalDateTime.now().format(DateTimeFormatter.ofPattern("dd.MM.yyyy HH:mm"));
         this.views = 0;
     }
-    
+
+    /**
+     * Kasvattaa uutisen katselukertoja yhdellä.
+     */
     public void increaseViews() {
         this.views++;
     }

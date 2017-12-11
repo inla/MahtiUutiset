@@ -2,10 +2,8 @@ package mahtiuutiset.controller;
 
 import mahtiuutiset.repository.NewsObjectRepository;
 import org.junit.After;
-import org.junit.AfterClass;
 import org.junit.Assert;
 import org.junit.Before;
-import org.junit.BeforeClass;
 import org.junit.Test;
 import static org.junit.Assert.*;
 import org.junit.runner.RunWith;
@@ -27,7 +25,7 @@ public class NewsControllerTest {
     private WebApplicationContext webAppContext;
 
     private MockMvc mockMvc;
-    
+
     @Autowired
     private NewsObjectRepository newsRepo;
 
@@ -74,12 +72,7 @@ public class NewsControllerTest {
                 .param("category", "kateoria"))
                 .andReturn();
 
-        assertTrue(newsRepo.count()!= 0);
+        assertTrue(newsRepo.count() != 0);
     }
 
-    // TODO add test methods here.
-    // The methods must be annotated with annotation @Test. For example:
-    //
-    // @Test
-    // public void hello() {}
 }

@@ -9,12 +9,15 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.springframework.data.jpa.domain.AbstractPersistable;
 
+/**
+ * Kategoria-luokka.
+ */
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
-public class Category extends AbstractPersistable<Long>{
-    
+public class Category extends AbstractPersistable<Long> {
+
     private String name;
     @ManyToMany(mappedBy = "categories")
     private List<NewsObject> news = new ArrayList<>();

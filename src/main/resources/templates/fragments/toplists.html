@@ -10,7 +10,7 @@
 
             <!--<div style="float:left; width:50%;">-->
             <br/><br/><br/><br/>
-            <h3>Top10 uusimmat</h3>
+            <h3>Top10 Uusimmat</h3>
             <div th:if="${newest} != null">
                 <div th:each="newsobj : ${newest}">
                     <a th:href="@{/{id}(id=${newsobj.id})}"> <span th:text="${newsobj.title}"/> <span th:text="${newsobj.date}"/></a>
@@ -20,7 +20,7 @@
             <br/><br/>
             <!--            </div>
                         <div style="float:left; width:50%;">-->
-            <h3>Top10 luetuimmat</h3>
+            <h3>Top10 Luetuimmat</h3>
             <div th:if="${popularest} != null">
                 <div th:each="newsobj : ${popularest}">
                     <a th:href="@{/{id}(id=${newsobj.id})}"> <span th:text="${newsobj.title}"/> <span th:text="${newsobj.date}"/></a>
