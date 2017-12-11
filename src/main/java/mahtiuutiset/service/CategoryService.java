@@ -25,7 +25,7 @@ public class CategoryService {
             if (name.isEmpty()) {
                 continue;
             }
-            Category category = categoryRepo.findByName(name);
+            Category category = findByName(name);
             if (category == null) {
                 category = new Category();
                 category.setName(name);
@@ -42,7 +42,7 @@ public class CategoryService {
 
     public void addNewsToCategories(List<Category> categories, NewsObject newsObj) {
         for (Category c : categories) {
-            categoryRepo.findByName(c.getName()).getNews().add(newsObj);
+            findByName(c.getName()).getNews().add(newsObj);
             save(c);
         }
     }
